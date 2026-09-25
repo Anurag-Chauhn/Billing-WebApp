@@ -188,6 +188,6 @@ razorpay.key.secret=YOUR_RAZORPAY_SECRET
 
 ## Author
 
-**Anurag Chauhan**
+**Anurag**
 
 This project was developed as a Java Full Stack project using Spring Boot and React.
