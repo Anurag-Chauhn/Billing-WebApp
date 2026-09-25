@@ -1,0 +1,6 @@
+@media print {
+    .receipt-popup .btn{
+        display: none;
+    }
+
+}

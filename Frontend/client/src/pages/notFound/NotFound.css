@@ -1,0 +1,109 @@
+/* ================================
+   Not Found Page
+================================ */
+
+.not-found-wrapper {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    box-sizing: border-box;
+    background: #f5f7fb;
+}
+
+.not-found-container {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    background: #ffffff;
+    padding: 55px 40px;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* 404 Number */
+
+.not-found-code {
+    margin: 0;
+    font-size: 110px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: 5px;
+    color: #28a745;
+}
+
+/* Title */
+
+.not-found-title {
+    margin: 20px 0 10px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #222;
+}
+
+/* Description */
+
+.not-found-message {
+    margin: 0 auto 30px;
+    max-width: 450px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #777;
+}
+
+/* Button */
+
+.not-found-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    background: #28a745;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.not-found-button:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.25);
+}
+
+.not-found-button:active {
+    transform: translateY(0);
+}
+
+/* ================================
+   Responsive
+================================ */
+
+@media (max-width: 600px) {
+    .not-found-wrapper {
+        padding: 20px;
+    }
+
+    .not-found-container {
+        padding: 40px 25px;
+    }
+
+    .not-found-code {
+        font-size: 80px;
+    }
+
+    .not-found-title {
+        font-size: 23px;
+    }
+
+    .not-found-message {
+        font-size: 14px;
+    }
+}
