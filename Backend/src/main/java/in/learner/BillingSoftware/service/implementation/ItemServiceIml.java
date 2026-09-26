@@ -9,6 +9,7 @@ import in.learner.BillingSoftware.repository.ItemRepository;
 import in.learner.BillingSoftware.service.FileUploadService;
 import in.learner.BillingSoftware.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -27,7 +28,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ItemServiceIml implements ItemService {
-
+    @Value(("${app.activation.url}"))
+    private String backend_url;
     private final ItemRepository itemRepository;
     private final CategoryRepository categoryRepository;
     private final FileUploadService fileUploadService;
@@ -41,7 +43,7 @@ public class ItemServiceIml implements ItemService {
         Files.createDirectories(uploadPath);
         Path targetLocation=uploadPath.resolve(fileName);
         Files.copy(file.getInputStream(),targetLocation, StandardCopyOption.REPLACE_EXISTING);
-        String imgUrl="http://localhost:8080/api/v1.0/uploads/"+fileName;
+        String imgUrl=backend_url+"/api/v1.0/uploads/"+fileName;
 
         ItemEntity newItem=convertToEntity(request);
         CategoryEntity existingCategory=categoryRepository.findByCategoryId(request.getCategoryId())

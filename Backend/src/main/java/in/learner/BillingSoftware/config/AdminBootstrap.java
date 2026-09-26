@@ -24,10 +24,10 @@ public class AdminBootstrap implements CommandLineRunner {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Value("${app.bootstrap.admin.email:}")
+    @Value("${app.admin.email:}")
     private String adminEmail;
 
-    @Value("${app.bootstrap.admin.password:}")
+    @Value("${app.admin.password:}")
     private String adminPassword;
 
     @Override
