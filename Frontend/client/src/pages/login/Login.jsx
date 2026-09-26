@@ -1,4 +1,4 @@
-import "./login.css";
+import "./Login.css";
 import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
