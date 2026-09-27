@@ -3,6 +3,7 @@
 import in.learner.BillingSoftware.filters.JwtRequestFilter;
 import in.learner.BillingSoftware.service.AppUserDetailsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -32,6 +33,9 @@ public class SecurityConfig {
     private final AppUserDetailsService appUserDetailsService;
     private final JwtRequestFilter jwtRequestFilter;
 
+    @Value("${billing.webapp.frontend.url}")
+    private String frontend_url;
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
@@ -39,7 +43,7 @@ public class SecurityConfig {
 
         // React frontend is running on port 5174
         config.setAllowedOrigins(
-                List.of("http://localhost:5173")
+                List.of(frontend_url)
         );
 
         config.setAllowedMethods(
