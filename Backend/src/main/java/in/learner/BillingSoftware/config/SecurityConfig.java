@@ -43,7 +43,7 @@ public class SecurityConfig {
 
         // React frontend is running on port 5173
         config.setAllowedOrigins(
-                List.of(frontend_url)
+                List.of(frontend_url,"http://localhost:5173")
         );
 
         config.setAllowedMethods(
