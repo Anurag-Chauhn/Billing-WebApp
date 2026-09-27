@@ -34,14 +34,14 @@ public class SecurityConfig {
     private final JwtRequestFilter jwtRequestFilter;
 
     @Value("${billing.webapp.frontend.url}")
-    private String frontend_url;
+    String frontend_url;
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
         CorsConfiguration config = new CorsConfiguration();
 
-        // React frontend is running on port 5174
+        // React frontend is running on port 5173
         config.setAllowedOrigins(
                 List.of(frontend_url)
         );
