@@ -21,12 +21,20 @@ const Explore=()=>{
                        categories={categories} />
                </div>
                <div className="horizontal-line"></div>
-               <div className="second-row">
+               <div className="second-row" style={{
+                   height: "100vh",
+                   overflowY: "auto",
+                   overflowX: "hidden"
+               }}>
                    <DisplayItem selectedCategory={selectedCategory} />
 
                </div>
            </div>
-           <div className="right-column flex-column">
+           <div className="right-column flex-column" style={{
+               height: "84vh",
+               overflowY: "auto",
+               overflowX: "hidden"
+           }}>
                <div className="customer-form-container" style={{ height:"15%"}}>
                    <CustomerForm customerName={customerName}
                                  setCustomerName={setCustomerName}

@@ -7,7 +7,12 @@ const CustomerForm = ({
                           setMobileNumber,
                       }) => {
     return (
-        <div className="p-3">
+        <div className="p-3"
+             style={{
+                 height: "100vh",
+                 overflowY: "auto",
+                 overflowX: "hidden"
+             }}>
             <div className="mb-3">
 
                 {/* Customer Name */}

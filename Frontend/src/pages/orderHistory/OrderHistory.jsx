@@ -53,7 +53,12 @@ const OrderHistory = () => {
     }
 
     return (
-        <div className="order-history-container">
+        <div className="order-history-container"
+             style={{
+                 height: "100vh",
+                 overflowY: "auto",
+                 overflowX: "hidden"
+             }}>
             <h2 className="mb-2 text-light">Recent Orders</h2>
 
             <div className="table-responsive">
