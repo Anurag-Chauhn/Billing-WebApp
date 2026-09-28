@@ -255,12 +255,26 @@ const CartSummary = ({ customerName, setCustomerName, mobileNumber, setMobileNum
                 </button>
             </div>
 
+            {/*{showPopup && (*/}
+            {/*    <ReceiptPopup*/}
+            {/*        orderDetails={{*/}
+            {/*            ...orderDetails,*/}
+            {/*            razorpayOrderId: orderDetails.paymentDetails?.razorpayOrderId,*/}
+            {/*            razorpayPaymentId: orderDetails.paymentDetails?.razorpayPaymentId*/}
+            {/*        }}*/}
+            {/*        onClose={handleClosePopup}*/}
+            {/*        onPrint={handlePrintReceipt}*/}
+            {/*    />*/}
+            {/*)}*/}
             {showPopup && (
                 <ReceiptPopup
                     orderDetails={{
                         ...orderDetails,
-                        razorpayOrderId: orderDetails.paymentDetails?.razorpayOrderId,
-                        razorpayPaymentId: orderDetails.paymentDetails?.razorpayPaymentId
+                        items: orderDetails.items || orderDetails.cartItems || [],
+                        razorpayOrderId:
+                        orderDetails.paymentDetails?.razorpayOrderId,
+                        razorpayPaymentId:
+                        orderDetails.paymentDetails?.razorpayPaymentId,
                     }}
                     onClose={handleClosePopup}
                     onPrint={handlePrintReceipt}
