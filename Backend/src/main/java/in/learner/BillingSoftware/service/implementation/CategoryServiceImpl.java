@@ -37,15 +37,15 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryResponse addCategory(CategoryRequest categoryRequest, MultipartFile file) throws IOException {
-        //String imgUrl=fileUploadService.uploadFile(file);
+        String imgUrl=fileUploadService.uploadFile(file);
 
 
-        String fileName= UUID.randomUUID().toString()+"."+ StringUtils.getFilenameExtension(file.getOriginalFilename());
-        Path uploadPath= Paths.get("uploads").toAbsolutePath().normalize();
-        Files.createDirectories(uploadPath);
-        Path targetLocation=uploadPath.resolve(fileName);
-        Files.copy(file.getInputStream(),targetLocation, StandardCopyOption.REPLACE_EXISTING);
-        String imgUrl=backend_url+"/api/v1.0/uploads/"+fileName;
+//        String fileName= UUID.randomUUID().toString()+"."+ StringUtils.getFilenameExtension(file.getOriginalFilename());
+//        Path uploadPath= Paths.get("uploads").toAbsolutePath().normalize();
+//        Files.createDirectories(uploadPath);
+//        Path targetLocation=uploadPath.resolve(fileName);
+//        Files.copy(file.getInputStream(),targetLocation, StandardCopyOption.REPLACE_EXISTING);
+//        String imgUrl=backend_url+"/api/v1.0/uploads/"+fileName;
 
 
         CategoryEntity newCategory=convertToEntity(categoryRequest);
@@ -69,25 +69,25 @@ public class CategoryServiceImpl implements CategoryService {
         CategoryEntity existsCategory=categoryRepository.findByCategoryId(categoryId).orElseThrow(()->
                 new RuntimeException("Category not found: "+categoryId));
 
-//        boolean isFileDeleted=fileUploadService.deleteFile(existsCategory.getImgUrl());
-//        if(isFileDeleted){
-//            categoryRepository.delete(existsCategory);
-//        }else {
-//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"Unable to delete the image");
-//
-//        }
+        boolean isFileDeleted=fileUploadService.deleteFile(existsCategory.getImgUrl());
+        if(isFileDeleted){
+            categoryRepository.delete(existsCategory);
+        }else {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"Unable to delete the image");
 
-        String imgUrl=existsCategory.getImgUrl();
-        String fileName=imgUrl.substring(imgUrl.lastIndexOf("/")+1);
-       Path uploadPath= Paths.get("uploads").toAbsolutePath().normalize();
-        Path filePath=uploadPath.resolve(fileName);
-
-        try {
-            Files.deleteIfExists(filePath);
-
-        }catch (IOException e){
-            e.printStackTrace();
         }
+
+//        String imgUrl=existsCategory.getImgUrl();
+//        String fileName=imgUrl.substring(imgUrl.lastIndexOf("/")+1);
+//       Path uploadPath= Paths.get("uploads").toAbsolutePath().normalize();
+//        Path filePath=uploadPath.resolve(fileName);
+//
+//        try {
+//            Files.deleteIfExists(filePath);
+//
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
         categoryRepository.delete(existsCategory);
 
     }

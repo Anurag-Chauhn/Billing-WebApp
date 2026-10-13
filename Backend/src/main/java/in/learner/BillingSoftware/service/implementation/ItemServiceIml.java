@@ -35,15 +35,15 @@ public class ItemServiceIml implements ItemService {
     private final FileUploadService fileUploadService;
     @Override
     public ItemResponse addItem(ItemRequest request, MultipartFile file) throws IOException {
-//        String imgUrl=fileUploadService.uploadFile(file);
+        String imgUrl=fileUploadService.uploadFile(file);
 
 
-        String fileName= UUID.randomUUID().toString()+"."+ StringUtils.getFilenameExtension(file.getOriginalFilename());
-        Path uploadPath= Paths.get("uploads").toAbsolutePath().normalize();
-        Files.createDirectories(uploadPath);
-        Path targetLocation=uploadPath.resolve(fileName);
-        Files.copy(file.getInputStream(),targetLocation, StandardCopyOption.REPLACE_EXISTING);
-        String imgUrl=backend_url+"/api/v1.0/uploads/"+fileName;
+//        String fileName= UUID.randomUUID().toString()+"."+ StringUtils.getFilenameExtension(file.getOriginalFilename());
+//        Path uploadPath= Paths.get("uploads").toAbsolutePath().normalize();
+//        Files.createDirectories(uploadPath);
+//        Path targetLocation=uploadPath.resolve(fileName);
+//        Files.copy(file.getInputStream(),targetLocation, StandardCopyOption.REPLACE_EXISTING);
+//        String imgUrl=backend_url+"/api/v1.0/uploads/"+fileName;
 
         ItemEntity newItem=convertToEntity(request);
         CategoryEntity existingCategory=categoryRepository.findByCategoryId(request.getCategoryId())
@@ -91,25 +91,27 @@ public class ItemServiceIml implements ItemService {
     public void deleteItems(String itemId) {
         ItemEntity existsItem=itemRepository.findByItemId(itemId).orElseThrow(()->
                 new RuntimeException("item not found: "+itemId));
-//        boolean isFileDeleted=fileUploadService.deleteFile(existsItem.getImgUrl());
-//        if(isFileDeleted){
-//            itemRepository.delete(existsItem);
-//
-//        }else {
-//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"Unable to delete the image");
-//
-//        }
-        String imgUrl=existsItem.getImgUrl();
-        String fileName=imgUrl.substring(imgUrl.lastIndexOf("/")+1);
-        Path uploadPath= Paths.get("uploads").toAbsolutePath().normalize();
-        Path filePath=uploadPath.resolve(fileName);
+        boolean isFileDeleted=fileUploadService.deleteFile(existsItem.getImgUrl());
+        if(isFileDeleted){
+            itemRepository.delete(existsItem);
 
-        try {
-            Files.deleteIfExists(filePath);
+        }else {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"Unable to delete the image");
 
-        }catch (IOException e){
-            e.printStackTrace();
         }
+
+
+//        String imgUrl=existsItem.getImgUrl();
+//        String fileName=imgUrl.substring(imgUrl.lastIndexOf("/")+1);
+//        Path uploadPath= Paths.get("uploads").toAbsolutePath().normalize();
+//        Path filePath=uploadPath.resolve(fileName);
+//
+//        try {
+//            Files.deleteIfExists(filePath);
+//
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
         itemRepository.delete(existsItem);
 
 
